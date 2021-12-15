@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="ns::CV_FLIGHT" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="CV_FLIGHT"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="ns::T_FLI_INFO">
+    <resourceUri>ns::T_FLI_INFO</resourceUri>
+  </DataSource>
+  <DataSource id="ns::T_FLIGHT">
+    <resourceUri>ns::T_FLIGHT</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="MANDT"/>
+      <viewAttribute id="CARRID"/>
+      <viewAttribute id="CONNID"/>
+      <viewAttribute id="COUNTRYFR"/>
+      <viewAttribute id="CITYFROM"/>
+      <viewAttribute id="AIRPFROM"/>
+      <viewAttribute id="COUNTRYTO"/>
+      <viewAttribute id="CITYTO"/>
+      <viewAttribute id="AIRPTO"/>
+      <viewAttribute id="FLTIME"/>
+      <viewAttribute id="DEPTIME"/>
+      <viewAttribute id="ARRTIME"/>
+      <viewAttribute id="DISTANCE"/>
+      <viewAttribute id="DISTID"/>
+      <viewAttribute id="FLTYPE"/>
+      <viewAttribute id="PERIOD"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ns::T_FLI_INFO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="MANDT"/>
+      <viewAttribute id="CARRID"/>
+      <viewAttribute id="CONNID"/>
+      <viewAttribute id="FLDATE"/>
+      <viewAttribute id="PRICE"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="PLANETYPE"/>
+      <viewAttribute id="SEATSMAX"/>
+      <viewAttribute id="SEATSOCC"/>
+      <viewAttribute id="PAYMENTSUM"/>
+      <viewAttribute id="SEATSMAX_B"/>
+      <viewAttribute id="SEATSOCC_B"/>
+      <viewAttribute id="SEATSMAX_F"/>
+      <viewAttribute id="SEATSOCC_F"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ns::T_FLIGHT"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="CARRID"/>
+      <viewAttribute id="CONNID"/>
+      <viewAttribute id="CITYFROM"/>
+      <viewAttribute id="CITYTO"/>
+      <viewAttribute id="FLDATE"/>
+      <viewAttribute id="PRICE"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="PLANETYPE"/>
+      <viewAttribute id="MANDT"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CARRID" source="CARRID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CONNID" source="CONNID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITYFROM" source="CITYFROM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITYTO" source="CITYTO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MANDT" source="MANDT"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="FLDATE" source="FLDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRICE" source="PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PLANETYPE" source="PLANETYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MANDT" source="MANDT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CARRID" source="CARRID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CONNID" source="CONNID"/>
+    </input>
+    <joinAttribute name="MANDT"/>
+    <joinAttribute name="CARRID"/>
+    <joinAttribute name="CONNID"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Join_1" filterExpressionLanguage="SQL">
+  <attributes>
+    <attribute id="CARRID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CARRID"/>
+      <keyMapping columnObjectName="Join_1" columnName="CARRID"/>
+    </attribute>
+    <attribute id="CONNID" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CONNID"/>
+      <keyMapping columnObjectName="Join_1" columnName="CONNID"/>
+    </attribute>
+    <attribute id="CITYFROM" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CITYFROM"/>
+      <keyMapping columnObjectName="Join_1" columnName="CITYFROM"/>
+    </attribute>
+    <attribute id="CITYTO" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CITYTO"/>
+      <keyMapping columnObjectName="Join_1" columnName="CITYTO"/>
+    </attribute>
+    <attribute id="FLDATE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FLDATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="FLDATE"/>
+    </attribute>
+    <attribute id="PRICE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRICE"/>
+      <keyMapping columnObjectName="Join_1" columnName="PRICE"/>
+    </attribute>
+    <attribute id="CURRENCY" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Join_1" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="PLANETYPE" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PLANETYPE"/>
+      <keyMapping columnObjectName="Join_1" columnName="PLANETYPE"/>
+    </attribute>
+    <attribute id="MANDT" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MANDT"/>
+      <keyMapping columnObjectName="Join_1" columnName="MANDT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+
+
+  <filter>&quot;MANDT&quot;='005' or &quot;MANDT&quot;='910'</filter>
+
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221.11302679000914" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92.00000000000001" y="376.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302.00000000000006" y="376.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221.11302679000914" y="237"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="130" y="22"/>
+      <rectangleSize width="155.265625"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="465" y="22"/>
+      <rectangleSize width="161.98486328125"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
